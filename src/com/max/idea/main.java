@@ -9,6 +9,10 @@ public class main {
         lesson4();
         lesson5();
         lesson6();
+        lesson7();
+        lesson8();
+        lesson9();
+        lesson10();
     }
 
     public static void lesson2(){
@@ -158,6 +162,100 @@ public class main {
                 break;
         }
 
+    }
+
+    public static void lesson7(){
+
+        int x = 10;
+        int y = 12;
+        int z = 444;
+
+        Scanner in = new Scanner(System.in);
+        System.out.print("Введите размер массива: ");
+        int arr_len = in.nextInt();
+        System.out.println();
+
+        int[] array = new int[arr_len];
+        System.out.println("Заполните массив: ");
+
+        for (int i = 0; i < arr_len; i++){
+            array[i] = in.nextInt();
+        }
+
+        for(int number: array){
+            if (number == x || number == y || number == z){
+                System.out.println("Данное значение имеется в константах");
+                break;
+            }
+        }
+    }
+
+    public static void lesson8(){
+        Scanner in = new Scanner(System.in);
+        System.out.print("Введите любое положительное целое число: ");
+        int number = in.nextInt();
+
+        int summ = 0;
+
+        for (int i = 1; i < number; i += 2){
+            summ += i;
+        }
+
+        System.out.println(summ);
+    }
+
+    public static void lesson9(){
+        Scanner in = new Scanner(System.in);
+        System.out.print("Введите длину массива: ");
+        int arr_len = in.nextInt();
+
+        double[] d_array = new double[arr_len];
+        double d_summ = 0.0;
+        System.out.println("Заполните массив (тип double): ");
+        for (int i = 0; i < arr_len; i++){
+            double d_temp = in.nextDouble();
+            d_array[i] = d_temp;
+            d_summ += d_temp;
+        }
+
+        double d_mean = d_summ / arr_len;
+
+        System.out.println("Среднее арифметическое элементов массива: " + d_mean);
+        System.out.println("Массив, каждый элемент которого умножен на среднее арифметическое: ");
+        for (double d: d_array){
+            System.out.print(d * d_mean + " ");
+        }
+    }
+
+    public static void lesson10(){
+        Scanner in = new Scanner(System.in);
+
+        System.out.print("Введите количество рядов матрицы: ");
+        int m_rows = in.nextInt();
+        System.out.print("Введите количество столбцов матрицы: ");
+        int m_cols = in.nextInt();
+
+        int[][] matrix = new int[m_rows][m_cols];
+
+        for(int r = 0; r < m_rows; r++){
+            System.out.println("Введите строку номер " + (r + 1));
+            for(int c = 0; c < m_cols; c++){
+                matrix[r][c] = in.nextInt();
+            }
+        }
+
+        System.out.println("Матрица: ");
+        for (int r = 0; r < m_rows; r++){
+            for(int c = 0; c < m_cols; c++){
+                System.out.print(matrix[r][c] + " ");
+            }
+            System.out.println();
+        }
+
+        System.out.println("Вывод первой строки, умноженной на 3: ");
+        for (int c = 0; c < m_cols; c++){
+            System.out.print( (matrix[0][c] * 3) + " ");
+        }
     }
 
 }
