@@ -1,4 +1,7 @@
 package com.max.idea;
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -13,6 +16,15 @@ public class main {
         lesson8();
         lesson9();
         lesson10();
+        lesson11();
+        lesson12();
+        lesson13();
+        lesson14();
+
+        finalTask1();
+        finalTask2();
+        finalTask3();
+        finalTask4();
     }
 
     public static void lesson2(){
@@ -258,6 +270,235 @@ public class main {
         }
     }
 
+    public static void lesson11(){
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Введите первое число: ");
+        String first_number_str = in.nextLine();
+        int firtst_number = Integer.parseInt(first_number_str);
+
+        System.out.println("Введите второе число: ");
+        int second_number = in.nextInt();
+
+        if(firtst_number >= second_number){
+            System.out.println("Большее число: " + firtst_number);
+            double min_double = new Double(second_number);
+            System.out.println("Меньшее число в double: " + min_double);
+        }
+        else{
+            System.out.println("Большее число: "+ second_number);
+            double min_double = new Double(firtst_number);
+            System.out.println("Меньшее число в double: " + min_double);
+        }
+    }
+
+    public static void lesson12(){
+        String str = "I like Java!!!";
+
+        boolean first_check = false;
+        boolean second_check = false;
+        boolean third_check = false;
+
+        if (str.contains("Java")) first_check = true;
+        if (str.startsWith("I like")) second_check = true;
+        if (str.endsWith("!!!")) third_check = true;
+
+        if (first_check && second_check && third_check){
+            String upper_str = str.toUpperCase();
+            System.out.println(upper_str);
+        }
+
+        System.out.println(str.replaceAll("a", "o").substring(7, 11));
+    }
+
+    public static void lesson13(){
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Введите строку:");
+        String str = in.nextLine();
+
+        String[] str_array = str.split(" ");
+
+        int latin_str_counter = 0;
+
+        for (String s: str_array){
+            if (s.matches("^[a-zA-Z0-9]+$")){
+                System.out.print(s + " ");
+                latin_str_counter++;
+            }
+        }
+
+        System.out.println("\nКоличество слов на латинице: " + latin_str_counter);
+    }
+
+    public static void lesson14(){
+
+        int[] array_of_int = new int[15];
+        Random rand = new Random();
+
+        for (int i = 0; i < array_of_int.length; i++){
+            array_of_int[i] = rand.nextInt(40) - 20;
+        }
+
+        System.out.println("Введеный массив: ");
+        for(int n: array_of_int){
+            System.out.print(n + " ");
+        }
+
+        int max = -20;
+        int min = 20;
+        for(int n: array_of_int){
+            max = Math.max(max, n);
+            min = Math.min(min, n);
+        }
+
+        System.out.println("\nМаксимальный элемент массива: " + max);
+        System.out.println("Минимальный элемент массива: " + min);
+
+        if(Math.abs(max) >= Math.abs(min)){
+            System.out.println("Максимальное по модулю: " + max);
+        }
+        else {
+            System.out.println("Максимальное по модулю: " + min);
+        }
+    }
+
+    public static void finalTask1(){
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Введите курс доллара: ");
+        double course = in.nextDouble();
+        System.out.println("Введите сумму в рублях: ");
+        double roubles = in.nextDouble();
+
+        double result = roubles / course;
+
+        System.out.printf("Итого %.2f долларов", result);
+    }
+
+    public static void finalTask2(){
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Введите уравнение: ");
+        String equation = in.nextLine();
+
+        char operator = equation.toCharArray()[1];
+        int x = 0;
+
+        switch (equation.indexOf('x')){
+            case 0:
+                switch (operator){
+                    case '+':
+                        x = Character.getNumericValue(equation.charAt(4)) - Character.getNumericValue(equation.charAt(2));
+                        break;
+                    case '-':
+                        x = Character.getNumericValue(equation.charAt(4)) + Character.getNumericValue(equation.charAt(2));
+                        break;
+                }
+                break;
+            case 2:
+                switch (operator){
+                    case '+':
+                        x = Character.getNumericValue(equation.charAt(4)) - Character.getNumericValue(equation.charAt(0));
+                        break;
+                    case '-':
+                        x = Character.getNumericValue(equation.charAt(4)) + Character.getNumericValue(equation.charAt(0));
+                        break;
+                }
+                break;
+            case 4:
+                switch (operator){
+                    case '+':
+                        x = Character.getNumericValue(equation.charAt(0)) + Character.getNumericValue(equation.charAt(2));
+                        break;
+                    case '-':
+                        x = Character.getNumericValue(equation.charAt(0)) - Character.getNumericValue(equation.charAt(2));
+                        break;
+                }
+                break;
+        }
+
+        System.out.println("x = " + x);
+    }
+
+    public static void finalTask3(){
+        Scanner in_int = new Scanner(System.in);
+        Scanner in_str = new Scanner(System.in);
+
+        System.out.println("Введите количество строк: ");
+        int rows_number = in_int.nextInt();
+
+        System.out.println("Введите строку номер 1");
+        String result = in_str.nextLine();
+        int result_uniq_symbols = finalTask3_numberOfuniqSymbols(result);
+
+        for (int i = 1; i < rows_number; i++){
+            System.out.println("Введите строку номер " + (i + 1));
+            String temp_string = in_str.nextLine();
+            int temp_number_of_uniq_symbols = finalTask3_numberOfuniqSymbols(temp_string);
+            if (temp_number_of_uniq_symbols > result_uniq_symbols) result = temp_string;
+        }
+
+        System.out.println("Ответ: " + result);
+    }
+
+    public static int finalTask3_numberOfuniqSymbols(String str){
+        String temp = "";
+        for (int i = 0; i < str.length(); i++){
+            char current = str.charAt(i);
+            if (temp.indexOf(current) < 0){
+                temp = temp + current;
+            } else {
+                temp = temp.replace(String.valueOf(current), "");
+            }
+        }
+
+        return temp.length();
+    }
+
+    public static void finalTask4(){
+
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Загадка: Сидит дед, во сто шуб одет, кто его раздевает, тот слезы проливает. Кто это?");
+
+        int attempt_number = 0;
+        String answer = "Заархивированный вирус";
+        boolean is_help_used = false;
+        
+        while (attempt_number < 3){
+            System.out.print("Попытка номер " + (attempt_number + 1) + ": ");
+
+            String attempt = in.nextLine();
+            if (attempt.equals(answer)){
+                System.out.println("Правильно!");
+                break;
+            }
+            else if (attempt.equals("Подсказка")){
+                if (attempt_number == 0) {
+                    System.out.println("То, ради чего существует Касперский прошедший через WinRar или 7zip.");
+                    is_help_used = true;
+                    continue;
+                }
+                else{
+                    System.out.println("Подсказка уже не доступна.");
+                    continue;
+                }
+            }
+            else{
+                if (is_help_used || attempt_number == 2){
+                    System.out.println("Обидно, приходи в другой раз!");
+                    break;
+                }
+                else{
+                    System.out.println("Подумай еще!");
+                }
+            }
+
+            attempt_number++;
+            System.out.println();
+        }
+    }
 }
 
 
